@@ -16,13 +16,10 @@ function App() {
   const handleSubmit = async (e) => {
   e.preventDefault();
   if (!city.trim()) {
-    // Display an error message
     setError('Please enter a valid city name.');
-    setResponseData({}); // Clear any existing data
+    setResponseData({}); 
   } else {
-    // Reset error state
     setError(null);
-    // Proceed with fetching location
     await getLocation(city);
   }
   };
@@ -37,8 +34,6 @@ function App() {
     let response = await axios.get(url);
     setResponseData(response.data);
   }
-
-
 
 
   
