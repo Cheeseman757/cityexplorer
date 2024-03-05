@@ -13,7 +13,7 @@ function App() {
     let value = event.target.value;
     setCity(value);
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
   e.preventDefault();
   if (!city.trim()) {
     // Display an error message
