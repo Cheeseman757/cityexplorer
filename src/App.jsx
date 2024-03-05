@@ -40,7 +40,7 @@ function App() {
         <form>
           <input type="text" placeholder="Enter a city name" onChange={handleInput} />
           <button onClick={handleSubmit}>
-            Search
+            Explore!
           </button>
         </form>
       </header>
