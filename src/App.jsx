@@ -28,6 +28,25 @@ function App() {
     setResponseData(response.data);
   }
 
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!city.trim()) {
+    // Display an error message
+    setError('Please enter a valid city name.');
+    setResponseData({}); // Clear any existing data
+  } else {
+    // Reset error state
+    setError(null);
+    // Proceed with fetching location
+    await getLocation(city);
+  }
+}
+
+
+
+
+  
   console.log(responseData);
   return (
     <>
@@ -39,19 +58,22 @@ function App() {
             Explore!
           </button>
         </form>
+      {error && <p className="error">{error}</p>} {/* Display error message */}
       </header>
       <div className="card">
         {responseData.display_name
-        ? <ol>
-            <p>{responseData.display_name}</p>
-            <img src={`https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${responseData.lat},${responseData.lon}&zoom=9`}/>
-          </ol>
-        : <p>Please Click the button</p>
+          ? (
+            <ol>
+              <p>{responseData.display_name}</p>
+              <img src={`https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${responseData.lat},${responseData.lon}&zoom=9`} alt="Location Map"/>
+            </ol>
+          )
+          : <p>Please Click the button</p>
         }
         <button onClick={() => handleNext(responseData?.next)}>Next</button>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
