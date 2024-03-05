@@ -14,22 +14,6 @@ function App() {
     setCity(value);
   }
   const handleSubmit = (e) => {
-    e.preventDefault();
-    getLocation(city);
-  }
-  const getLocation = async (city) => {
-    let response = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${city}&format=json`);
-    console.log(response);
-    setResponseData(response.data[0]);
-  }
-
-  const handleNext = async (url) => {
-    let response = await axios.get(url);
-    setResponseData(response.data);
-  }
-
-
-const handleSubmit = async (e) => {
   e.preventDefault();
   if (!city.trim()) {
     // Display an error message
@@ -41,7 +25,16 @@ const handleSubmit = async (e) => {
     // Proceed with fetching location
     await getLocation(city);
   }
-}
+  const getLocation = async (city) => {
+    let response = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${city}&format=json`);
+    console.log(response);
+    setResponseData(response.data[0]);
+  }
+
+  const handleNext = async (url) => {
+    let response = await axios.get(url);
+    setResponseData(response.data);
+  }
 
 
 
