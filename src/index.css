@@ -65,4 +65,9 @@ button:focus-visible {
   button {
     background-color: #76bc0c;
   }
+.error {
+  color: red;
+  font-weight: bold;
+}
+  
 }
