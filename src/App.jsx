@@ -23,10 +23,6 @@ function App() {
     setResponseData(response.data[0]);
   }
 
-  const getPokemon = async () => {
-    let response = await axios.get('https://pokeapi.co/api/v2/pokemon');
-    setResponseData(response.data);
-  }
   const handleNext = async (url) => {
     let response = await axios.get(url);
     setResponseData(response.data);
