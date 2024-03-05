@@ -53,7 +53,7 @@ function App() {
             Explore!
           </button>
         </form>
-      {error && <p className="error">{error}</p>} {/* Display error message */}
+      {error && <p className="error">{error}</p>} {Error: PLease enter valid city}
       </header>
       <div className="card">
         {responseData.display_name
