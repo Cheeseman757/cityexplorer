@@ -24,10 +24,15 @@ function App() {
   }
   };
   
-  const getLocation = async (city) => {
-    let response = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${city}&format=json`);
-    console.log(response);
-    setResponseData(response.data[0]);
+ const getLocation = async (city) => {
+    try {
+      let response = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${city}&format=json`);
+      console.log(response);
+      setResponseData(response.data[0]);
+    } catch (e) {
+      setError('Not able to get location, please double check your city name.');
+      console.log('Not able to get location', e);
+    }
   }
 
   const handleNext = async (url) => {
