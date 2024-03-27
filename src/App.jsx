@@ -24,10 +24,15 @@ function App() {
   }
   };
   
-  const getLocation = async (city) => {
-    let response = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${city}&format=json`);
-    console.log(response);
-    setResponseData(response.data[0]);
+ const getLocation = async (city) => {
+    try {
+      let response = await axios.get(`https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${city}&format=json`);
+      console.log(response);
+      setResponseData(response.data[0]);
+    } catch (e) {
+      setError('Not able to get location, please double check your city name.');
+      console.log('Not able to get location', e);
+    }
   }
 
   const handleNext = async (url) => {
@@ -55,10 +60,32 @@ function App() {
           ? (
             <ol>
               <p>{responseData.display_name}</p>
+              <p>{`Latitude: ${cityResponseData.lat}, Longitude: ${cityResponseData.lon}`}</p>
               <img src={`https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${responseData.lat},${responseData.lon}&zoom=9`} alt="Location Map"/>
             </ol>
           )
-          : <p>Please Click the button</p>
+          <div>
+            <h3 style={{ padding: '20px' }}> Weather </h3>
+            <Container>
+              <Row xs={1} sm={2} md={3} lg={3}>
+                {weatherResponseData.data.map((day, idx) => {
+                  // {console.log(day)}
+                  return (
+                    <Card key={idx} style={{ padding: '20px' }}>
+                      <Card.Body>
+                        <Card.Title>{day.date}</Card.Title>
+                        <Card.Text>High: {day.high}</Card.Text>
+                        <Card.Text>Low: {day.low}</Card.Text>
+                        <Card.Text>{day.description}</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  );     
+                })};
+              </Row>
+            </Container>
+          </div>
+        </div>
+        : <p>Please Click the button</p>
         }
         <button onClick={() => handleNext(responseData?.next)}>Next</button>
       </div>
