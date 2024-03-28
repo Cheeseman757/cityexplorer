@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios';
-import './App.css'
+
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const SERVER_LINK = import.meta.env.VITE_SERVER_LINK;
